@@ -1,0 +1,3 @@
+* README
+** Screenshot taker and uploader
+*** See ss.sh for more info
