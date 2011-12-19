@@ -6,6 +6,9 @@
 # Instructions: Install dependencies, configure below,
 # set up SSH keys with the server you are uploading to,
 # and bind to a key in your desktop environment.
+#
+# If you specify the word "select", you may select a window
+# or region to take a screenshot of.
 
 # SSH Server (ex. example.com)
 sshserver=""
@@ -19,7 +22,19 @@ uploadsite=""
 sstring="`date +%d_%m_%y_%H_%M_%S.png`"
 # End of config
 
+case $1 in
+select)
+sleep 1
+scrot "/tmp/$sstring" -s
+;;
+*)
 scrot "/tmp/$sstring"
+;;
+esac
+if [ ! -f "/tmp/$sstring" ]; then
+	echo -e "message:Screenshot ERROR: No image produced." | zenity --notification --listen
+	exit
+fi
 scp "/tmp/$sstring" "$sshuser@$sshserver:$uploadpath"
 rm "/tmp/$sstring"
 echo -n "$uploadsite$sstring" | xclip -selection p
