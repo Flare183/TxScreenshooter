@@ -25,7 +25,7 @@ sstring="`date +%d_%m_%y_%H_%M_%S.png`"
 case $1 in
 select)
 sleep 1
-scrot "/tmp/$sstring" -s
+scrot "/tmp/$sstring" -s -b
 ;;
 *)
 scrot "/tmp/$sstring"
